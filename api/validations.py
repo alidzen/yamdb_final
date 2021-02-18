@@ -11,5 +11,7 @@ def uniq_review(context, data):
     title = get_object_or_404(Title, pk=title_id)
 
     if Review.objects.filter(title=title, author=author).exists():
-        raise ValidationError({'title': 'Author may have only one review for title'})
+        raise ValidationError(
+            {'title': 'Author may have only one review for title'}
+        )
     return data

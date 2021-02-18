@@ -27,7 +27,6 @@ token_generator = PasswordResetTokenGenerator()
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def obtain_confirmation_code(request):
-
     serializer = ObtainCodeSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
 
@@ -59,7 +58,6 @@ def obtain_confirmation_code(request):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def obtain_auth_token(request):
-
     serializer = ObtainTokenSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
 
@@ -69,7 +67,11 @@ def obtain_auth_token(request):
     confirmation_code = serializer.validated_data.get('confirmation_code')
 
     if not token_generator.check_token(user, confirmation_code):
-        content = {'confirmation_code': ['No active account found with the given credentials']}
+        content = {
+            'confirmation_code': [
+                'No active account found with the given credentials'
+            ]
+        }
         return Response(content, status=status.HTTP_400_BAD_REQUEST)
 
     user.is_active = True

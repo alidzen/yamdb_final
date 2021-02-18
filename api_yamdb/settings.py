@@ -1,5 +1,7 @@
 import os
+import sentry_sdk
 from datetime import timedelta
+from sentry_sdk.integrations.django import DjangoIntegration
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY')
@@ -77,13 +79,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
@@ -107,23 +107,15 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
 }
 
-
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
 
 DEFAULT_DOMAIN = 'yamdb.com'
 DEFAULT_FROM_EMAIL = f'api@{DEFAULT_DOMAIN}'
 
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
-
 sentry_sdk.init(
-    dsn="https://1e89a7ae62db4446921f0fa05189e4e8@o508262.ingest.sentry.io/5600504",
+    dsn='https://1e89a7ae62db4446921f0fa05189e4e8@o508262.ingest.sentry.io/5600504',
     integrations=[DjangoIntegration()],
     traces_sample_rate=1.0,
-
-    # If you wish to associate users to errors (assuming you are using
-    # django.contrib.auth) you may enable sending PII data.
     send_default_pii=True
 )
-

@@ -14,8 +14,8 @@ see [Docker Get Started Documentation](https://www.docker.com/get-started)
 Clone repository from GitHub
 
 ```sh
-$ git clone https://github.com/alidzen/infra_sp2.git
-$ cd infra_sp2
+$ git clone https://github.com/alidzen/yamdb_final.git
+$ cd yamdb_final
 ```
 
 ## Run project

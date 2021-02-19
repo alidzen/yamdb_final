@@ -1,5 +1,7 @@
 # API Yamdb Project
 
+![Deploy](https://github.com/alidzen/yamdb_final/workflows/Yamdb%20workflow/badge.svg)
+
 API for working with titles, genres, reviews based on Django Framework
 
 ## Prerequisites

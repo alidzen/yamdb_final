@@ -44,6 +44,8 @@ jobs:
           tags: alidzen/yamdb:latest
 
   deploy:
+    env:
+      PROJECT_ROOT: yamdb_final
     runs-on: ubuntu-latest
     needs: build_and_push_to_docker_hub
     steps:
@@ -54,13 +56,16 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }} # если ваш ssh-ключ защищен паролем
+          source: "docker-compose.yaml, nginx/default.conf"
+          target: ${{ env.PROJECT_ROOT}}
           script: |
             cd ${{ env.PROJECT_ROOT }}
-            sudo sudo apt update && sudo apt upgrade -y
+            sudo apt-get update -y
             sudo apt-get remove docker docker-engine docker.io -y
             sudo apt install docker.io docker-compose -y
             sudo systemctl start docker
             sudo docker pull alidzen/yamdb_final:latest
+            sudo docker stop $(sudo docker ps -a -q) && sudo docker rm $(sudo docker ps -a -q) && sudo docker rmi $(sudo docker images -q)
             sudo docker-compose down -v
             sudo docker-compose up -d
 

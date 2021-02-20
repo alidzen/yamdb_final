@@ -55,7 +55,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
-          source: "docker-compose.yaml, nginx/default.conf"
+          source: "docker-compose.yaml, nginx/default.conf, .env.example"
           target: ${{ env.PROJECT_ROOT }}
       - name: executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
@@ -63,9 +63,10 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.PASSPHRASE }} # если ваш ssh-ключ защищен паролем
+          passphrase: ${{ secrets.PASSPHRASE }}
           script: |
             cd ${{ env.PROJECT_ROOT }}
+            mv .env.example .env
             sudo apt-get remove docker docker-engine docker.io containerd runc
             sudo apt-get update -y
             sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common

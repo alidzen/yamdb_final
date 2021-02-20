@@ -69,7 +69,6 @@ jobs:
             sudo apt-get install docker-ce docker-ce-cli containerd.io
             sudo systemctl start docker
             sudo docker pull alidzen/yamdb:latest
-            sudo docker stop $(sudo docker ps -a -q) && sudo docker rm $(sudo docker ps -a -q) && sudo docker rmi $(sudo docker images -q)
             sudo docker-compose down -v
             sudo docker-compose up -d
 

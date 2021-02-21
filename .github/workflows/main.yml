@@ -45,10 +45,11 @@ jobs:
 
   deploy:
     env:
-      PROJECT_ROOT: /home/${{ secrets.HOST }}/yamdb_final
+      PROJECT_ROOT: yamdb_final
     runs-on: ubuntu-latest
     needs: build_and_push_to_docker_hub
     steps:
+      - uses: actions/checkout@master
       - name: copy docker-compose and nginx
         uses: appleboy/scp-action@master
         with:

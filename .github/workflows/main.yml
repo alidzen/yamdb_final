@@ -49,18 +49,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: build_and_push_to_docker_hub
     steps:
-      - name: check comands inside
-        uses: appleboy/drone-ssh
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.PASSPHRASE }}
-          script: |
-            echo "run inside server"
-            ls -a
-            mkdir abc/def/efg
-            echo "you can't see the steps."
       - uses: actions/checkout@master
       - name: copy docker-compose and nginx
         uses: appleboy/scp-action@master
@@ -70,7 +58,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           source: "docker-compose.yaml, nginx/default.conf, .env.example"
-          target: ~/${{ env.PROJECT_ROOT }}
+          target: "test"
       - name: executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
         with:

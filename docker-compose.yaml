@@ -13,7 +13,7 @@ services:
     env_file:
       - ./.env
   web:
-    build: alidzen/yamdb:latest
+    image: alidzen/yamdb:latest
     volumes:
       - static_files:/code/static
       - media_files:/code/media/

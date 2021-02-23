@@ -77,9 +77,8 @@ jobs:
             sudo apt-get update -y
             sudo apt-get install docker-ce docker-ce-cli docker-compose containerd.io -y
             sudo systemctl start docker
-            sudo docker-compose down -v
-            sudo docker system prune -f
             sudo docker pull alidzen/yamdb:latest
+            sudo docker-compose down -v
             sudo docker-compose up -d
             sudo docker-compose exec web python manage.py collectstatic
 

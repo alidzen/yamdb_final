@@ -80,7 +80,6 @@ jobs:
             sudo docker pull alidzen/yamdb:latest
             sudo docker-compose down -v
             sudo docker-compose up -d --build
-            sudo docker-compose exec web python manage.py collectstatic
 
   send_message:
     runs-on: ubuntu-latest

@@ -57,6 +57,8 @@ Done! The project will be running at http://0.0.0.0:8000/
 - http://0.0.0.0:8000/api/v1/titles/ — See created Titles without any permissions
 - http://0.0.0.0:8000/redoc — Detailed information about how API works
 
+**After deployment the project will be available on http://178.154.234.255/** 
+
 ## About author
 
 Denis Golubtsov is a student of the 7th backend faculty of Y.Praktikum

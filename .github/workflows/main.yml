@@ -44,6 +44,7 @@ jobs:
           tags: alidzen/yamdb:latest
 
   deploy:
+    if: github.ref == 'refs/heads/master'
     env:
       PROJECT_ROOT: yamdb_final
     runs-on: ubuntu-latest
